@@ -10,17 +10,18 @@ import PracticalTestBooking from "@/components/PracticalTestBooking";
 import EmergencyResponse from "@/components/EmergencyResponse";
 import ExaminerBookingManagement from "@/components/ExaminerBookingManagement";
 import CivilianEmergencyReport from "@/components/CivilianEmergencyReport";
+import EmergencyResponderDashboard from "@/components/EmergencyResponderDashboard";
 import RevisionGuides from "@/components/RevisionGuides";
 
-type AppState = 'role-selection' | 'student-dashboard' | 'examiner-dashboard' | 'flashcards' | 'revision-guides' | 'video-library' | 'practice-quiz' | 'final-test' | 'practical-test-booking' | 'emergency-response' | 'practical-bookings' | 'create-flashcard' | 'create-mcq' | 'create-openended' | 'view-results' | 'civilian-emergency-report';
+type AppState = 'role-selection' | 'student-dashboard' | 'examiner-dashboard' | 'emergency-responder-dashboard' | 'flashcards' | 'revision-guides' | 'video-library' | 'practice-quiz' | 'final-test' | 'practical-test-booking' | 'emergency-response' | 'practical-bookings' | 'create-flashcard' | 'create-mcq' | 'create-openended' | 'view-results' | 'civilian-emergency-report';
 
 const Index = () => {
   const [currentState, setCurrentState] = useState<AppState>('role-selection');
-  const [userRole, setUserRole] = useState<'student' | 'examiner' | 'civilian' | null>(null);
+  const [userRole, setUserRole] = useState<'student' | 'examiner' | 'civilian' | 'emergency-responder' | null>(null);
   const [hasPassedTheoryTest, setHasPassedTheoryTest] = useState(false);
   const [hasPassedPracticalTest, setHasPassedPracticalTest] = useState(false);
 
-  const handleRoleSelect = (role: 'student' | 'examiner' | 'civilian') => {
+  const handleRoleSelect = (role: 'student' | 'examiner' | 'civilian' | 'emergency-responder') => {
     setUserRole(role);
     if (role === 'student') {
       setCurrentState('student-dashboard');
@@ -28,6 +29,8 @@ const Index = () => {
       setCurrentState('examiner-dashboard');
     } else if (role === 'civilian') {
       setCurrentState('civilian-emergency-report');
+    } else if (role === 'emergency-responder') {
+      setCurrentState('emergency-responder-dashboard');
     }
   };
 
@@ -46,7 +49,7 @@ const Index = () => {
   };
 
   const handleBack = () => {
-    if (currentState === 'student-dashboard' || currentState === 'examiner-dashboard' || currentState === 'civilian-emergency-report') {
+    if (currentState === 'student-dashboard' || currentState === 'examiner-dashboard' || currentState === 'civilian-emergency-report' || currentState === 'emergency-responder-dashboard') {
       setCurrentState('role-selection');
       setUserRole(null);
     } else if (userRole === 'student') {
@@ -55,6 +58,8 @@ const Index = () => {
       setCurrentState('examiner-dashboard');
     } else if (userRole === 'civilian') {
       setCurrentState('civilian-emergency-report');
+    } else if (userRole === 'emergency-responder') {
+      setCurrentState('emergency-responder-dashboard');
     }
   };
 
@@ -68,6 +73,9 @@ const Index = () => {
       
       case 'examiner-dashboard':
         return <ExaminerDashboard onBack={handleBack} onNavigate={handleNavigation} />;
+      
+      case 'emergency-responder-dashboard':
+        return <EmergencyResponderDashboard onBack={handleBack} />;
       
       case 'flashcards':
         return <Flashcards onBack={handleBack} />;

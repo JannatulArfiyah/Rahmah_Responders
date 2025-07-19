@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { UserCheck, GraduationCap, Stethoscope, BookOpen, AlertTriangle } from "lucide-react";
+import { UserCheck, GraduationCap, Stethoscope, BookOpen, AlertTriangle, Truck } from "lucide-react";
 
 interface RoleSelectorProps {
-  onRoleSelect: (role: 'student' | 'examiner' | 'civilian') => void;
+  onRoleSelect: (role: 'student' | 'examiner' | 'civilian' | 'emergency-responder') => void;
 }
 
 const RoleSelector = ({ onRoleSelect }: RoleSelectorProps) => {
-  const [selectedRole, setSelectedRole] = useState<'student' | 'examiner' | 'civilian' | null>(null);
+  const [selectedRole, setSelectedRole] = useState<'student' | 'examiner' | 'civilian' | 'emergency-responder' | null>(null);
 
   const roles = [
     {
@@ -34,6 +34,14 @@ const RoleSelector = ({ onRoleSelect }: RoleSelectorProps) => {
       icon: AlertTriangle,
       features: ['Report Emergencies', 'Share GPS Location', 'Get Immediate Help', 'Connect with Responders'],
       color: 'destructive'
+    },
+    {
+      id: 'emergency-responder' as const,
+      title: 'Emergency Responder',
+      description: 'Monitor and respond to emergency cases on the map',
+      icon: Truck,
+      features: ['View Emergency Map', 'See Case Details', 'Respond to Emergencies', 'Track Active Cases'],
+      color: 'accent'
     }
   ];
 
@@ -67,11 +75,13 @@ const RoleSelector = ({ onRoleSelect }: RoleSelectorProps) => {
                   <div className="flex justify-center mb-4">
                     <div className={`p-4 rounded-full ${
                       role.id === 'student' ? 'bg-primary/10' : 
-                      role.id === 'examiner' ? 'bg-secondary/10' : 'bg-destructive/10'
+                      role.id === 'examiner' ? 'bg-secondary/10' : 
+                      role.id === 'civilian' ? 'bg-destructive/10' : 'bg-blue-500/10'
                     }`}>
                       <Icon className={`h-8 w-8 ${
                         role.id === 'student' ? 'text-primary' : 
-                        role.id === 'examiner' ? 'text-secondary-foreground' : 'text-destructive'
+                        role.id === 'examiner' ? 'text-secondary-foreground' : 
+                        role.id === 'civilian' ? 'text-destructive' : 'text-blue-500'
                       }`} />
                     </div>
                   </div>
@@ -105,7 +115,8 @@ const RoleSelector = ({ onRoleSelect }: RoleSelectorProps) => {
             >
               Continue as {
                 selectedRole === 'student' ? 'Student' : 
-                selectedRole === 'examiner' ? 'Examiner' : 'Emergency Reporter'
+                selectedRole === 'examiner' ? 'Examiner' : 
+                selectedRole === 'civilian' ? 'Emergency Reporter' : 'Emergency Responder'
               }
             </Button>
           </div>
