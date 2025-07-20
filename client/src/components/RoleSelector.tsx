@@ -49,13 +49,12 @@ const RoleSelector = ({ onRoleSelect }: RoleSelectorProps) => {
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-4xl">
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-4">
+          <div className="flex justify-center mb-6">
             <img 
               src="/Rahmah Responders Logo.jpg" 
               alt="Rahmah Responders Logo" 
-              className="h-8 w-8 object-contain"
+              className="h-32 w-32 object-contain rounded-lg shadow-lg"
             />
-            <h1 className="text-4xl font-bold font-[Poppins] text-foreground">Rahmah Responders</h1>
           </div>
           <p className="text-xl font-[Poppins] text-muted-foreground">
             First Aid Training Platform
