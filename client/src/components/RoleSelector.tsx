@@ -50,7 +50,11 @@ const RoleSelector = ({ onRoleSelect }: RoleSelectorProps) => {
       <div className="w-full max-w-4xl">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <Stethoscope className="h-8 w-8 text-primary" />
+            <img 
+              src="/Rahmah Responders Logo.jpg" 
+              alt="Rahmah Responders Logo" 
+              className="h-8 w-8 object-contain"
+            />
             <h1 className="text-4xl font-bold font-[Poppins] text-foreground">Rahmah Responders</h1>
           </div>
           <p className="text-xl font-[Poppins] text-muted-foreground">
